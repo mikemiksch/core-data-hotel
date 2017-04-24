@@ -7,12 +7,60 @@
 //
 
 #import "ViewController.h"
+#import "AutoLayout.h"
 
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
+
+- (void)loadView {
+    [super loadView];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+
+    [self setupLayout];
+
+}
+
+
+- (void)setupLayout {
+    
+    float navBarHeight = CGRectGetHeight(self.navigationController.navigationBar.frame);
+    
+    UIButton *browseButton = [self createButtonWithTitle:@"Browse"];
+    UIButton *bookButton = [self createButtonWithTitle:@"Book"];
+    UIButton *lookUpButton = [self createButtonWithTitle:@"Look Up"];
+    
+    [AutoLayout leadingConstraintFrom:browseButton toView: self.view];
+    [AutoLayout trailingConstraintFrom:browseButton toView: self.view];
+    
+    NSLayoutConstraint *browseHeight = [AutoLayout genericConstraintFrom:browseButton toView:self.view withAttribute:NSLayoutAttributeHeight];
+    
+    [browseButton addTarget:self action:@selector(browseButtonSelected) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+- (void)browseButtonSelected {
+    NSLog(@"Work on this for lab!");
+}
+
+
+- (UIButton *)createButtonWithTitle:(NSString *)title {
+    
+    UIButton *button = [[UIButton alloc]init];
+    
+    [button setTitle:title forState:normal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    [button setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addSubview:button];
+    
+    return button;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
