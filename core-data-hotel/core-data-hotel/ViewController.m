@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "AutoLayout.h"
+#import "HotelsViewController.h"
 
 @interface ViewController ()
 
@@ -43,7 +44,7 @@
 }
 
 - (void)browseButtonSelected {
-    UIViewController *hotelsView = [[UIViewController alloc]init];
+    HotelsViewController *hotelsView = [[HotelsViewController alloc]init];
     NSLog(@"Work on this for lab!");
     [self presentViewController:hotelsView animated:YES completion:nil];
 }

@@ -8,7 +8,7 @@
 
 #import "HotelsViewController.h"
 #import "AppDelegate.h"
-
+#import "AutoLayout.h"
 #import "Hotel+CoreDataClass.h"
 #import "Hotel+CoreDataProperties.h"
 
@@ -25,18 +25,25 @@
 
 - (void)loadView {
     [super loadView];
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self allHotels];
+    self.hotelsTableView = [[UITableView alloc]init];
+    [self setupLayout];
+    NSLog(@"%@", _allHotels);
         //add hotelsTableView as subview and apply constraints
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.hotelsTableView.dataSource = self;
     [self.hotelsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+}
 
-
-
-
+- (void)setupLayout {
+    [self.view addSubview:self.hotelsTableView];
+    self.hotelsTableView.translatesAutoresizingMaskIntoConstraints = NO;
+    [AutoLayout fullScreenContraintsWithVFLForView:self.hotelsTableView];
+    
 }
 
 - (NSArray *)allHotels {
@@ -46,7 +53,7 @@
         
         NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
         
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Hotels"];
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Hotel"];
         
         NSError *fetchError;
         NSArray *hotels = [context executeFetchRequest:request error:&fetchError];
@@ -64,7 +71,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _allHotels.count;
+    return [_allHotels count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
