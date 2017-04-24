@@ -12,18 +12,30 @@
 #import "Hotel+CoreDataClass.h"
 #import "Hotel+CoreDataProperties.h"
 
-@interface HotelsViewController ()
+@interface HotelsViewController ()<UITableViewDataSource>
 
 @property(strong, nonatomic) NSArray *allHotels;
 
-@property(strong, nonatomic) UITableView *hotelTableView;
+@property(strong, nonatomic) UITableView *hotelsTableView;
 
 @end
 
 @implementation HotelsViewController
 
+
+- (void)loadView {
+    [super loadView];
+        //add hotelsTableView as subview and apply constraints
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.hotelsTableView.dataSource = self;
+    [self.hotelsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+
+
+
 
 }
 
