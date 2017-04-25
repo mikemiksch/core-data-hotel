@@ -17,6 +17,7 @@
 		83C2AA031EAE951B00CCADAF /* hotel.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C2AA001EAE951B00CCADAF /* hotel.png */; };
 		83C2AA041EAE951B00CCADAF /* hotels.json in Resources */ = {isa = PBXBuildFile; fileRef = 83C2AA011EAE951B00CCADAF /* hotels.json */; };
 		83C2AA051EAE951B00CCADAF /* room.png in Resources */ = {isa = PBXBuildFile; fileRef = 83C2AA021EAE951B00CCADAF /* room.png */; };
+		83DC3FAC1EAEC0F200A60CB2 /* RoomsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DC3FAB1EAEC0F100A60CB2 /* RoomsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,8 @@
 		83C2AA001EAE951B00CCADAF /* hotel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hotel.png; sourceTree = "<group>"; };
 		83C2AA011EAE951B00CCADAF /* hotels.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hotels.json; sourceTree = "<group>"; };
 		83C2AA021EAE951B00CCADAF /* room.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = room.png; sourceTree = "<group>"; };
+		83DC3FAA1EAEC0F100A60CB2 /* RoomsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoomsViewController.h; path = "core-data-hotel/RoomsViewController.h"; sourceTree = "<group>"; };
+		83DC3FAB1EAEC0F100A60CB2 /* RoomsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RoomsViewController.m; path = "core-data-hotel/RoomsViewController.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +102,8 @@
 				83C2A9E61EAE5ED600CCADAF /* ViewController.m */,
 				83480A981EAEA495004392EF /* HotelsViewController.h */,
 				83480A991EAEA495004392EF /* HotelsViewController.m */,
+				83DC3FAA1EAEC0F100A60CB2 /* RoomsViewController.h */,
+				83DC3FAB1EAEC0F100A60CB2 /* RoomsViewController.m */,
 			);
 			name = Controller;
 			path = ..;
@@ -199,6 +204,7 @@
 				83480A9A1EAEA495004392EF /* HotelsViewController.m in Sources */,
 				83C2A9ED1EAE5ED600CCADAF /* core_data_hotel.xcdatamodeld in Sources */,
 				83C2A9E41EAE5ED500CCADAF /* AppDelegate.m in Sources */,
+				83DC3FAC1EAEC0F200A60CB2 /* RoomsViewController.m in Sources */,
 				83480AA81EAEAC1A004392EF /* main.m in Sources */,
 				8368FF6C1EAEA2090019509C /* AutoLayout.m in Sources */,
 			);

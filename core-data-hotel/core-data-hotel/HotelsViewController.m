@@ -7,12 +7,8 @@
 //
 
 #import "HotelsViewController.h"
-#import "AppDelegate.h"
-#import "AutoLayout.h"
-#import "Hotel+CoreDataClass.h"
-#import "Hotel+CoreDataProperties.h"
 
-@interface HotelsViewController ()<UITableViewDataSource>
+@interface HotelsViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property(strong, nonatomic) NSArray *allHotels;
 
@@ -36,6 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.hotelsTableView.dataSource = self;
+    self.hotelsTableView.delegate = self;
     [self.hotelsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
 }
 
@@ -65,7 +62,6 @@
         _allHotels = hotels;
         
     }
-    
     return _allHotels;
     
 }
@@ -76,14 +72,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    Hotel *selectedHotel = _allHotels[indexPath.row];
-    cell.textLabel.text = selectedHotel.name;
+    Hotel *hotel = _allHotels[indexPath.row];
+    cell.textLabel.text = hotel.name;
     return cell;
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Hotel *selectedHotel = _allHotels[indexPath.row];
+    ;
+    RoomsViewController *rooms = [[RoomsViewController alloc]init];
+    rooms.selectedHotel = selectedHotel;
+    NSLog(@"%@", selectedHotel);
+    [self.navigationController pushViewController:rooms animated:YES];
+    
+}
 
 
 @end

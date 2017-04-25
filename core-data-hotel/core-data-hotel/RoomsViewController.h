@@ -1,5 +1,5 @@
 //
-//  HotelsViewController.h
+//  RoomsViewController.h
 //  core-data-hotel
 //
 //  Created by Mike Miksch on 4/24/17.
@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RoomsViewController.h"
+#import "AppDelegate.h"
+#import "AutoLayout.h"
+#import "Hotel+CoreDataClass.h"
+#import "Hotel+CoreDataProperties.h"
 
-@interface HotelsViewController : UIViewController
+@interface RoomsViewController : UIViewController
 
 @property(strong, nonatomic) Hotel *selectedHotel;
 

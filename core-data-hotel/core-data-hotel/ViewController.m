@@ -46,7 +46,8 @@
 - (void)browseButtonSelected {
     HotelsViewController *hotelsView = [[HotelsViewController alloc]init];
     NSLog(@"Work on this for lab!");
-    [self presentViewController:hotelsView animated:YES completion:nil];
+    [self.navigationController pushViewController:hotelsView animated:YES];
+//    [self presentViewController:hotelsView animated:YES completion:nil];
 }
 
 
