@@ -45,7 +45,6 @@
 - (void)allRooms {
     for (Room *room in _selectedHotel.rooms) {
         [self.hotelRooms addObject:room];
-        NSLog(@"%@", room[@"number"]);
     }
         NSLog(@"%@", self.hotelRooms);
 }
@@ -56,9 +55,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    NSDictionary *room = self.hotelRooms[indexPath.row];
-    NSLog(@"%@", room[@"number"]);
-    cell.textLabel.text = [NSString stringWithFormat:@"Room %@", room[@"number"]];
+    Room *room = self.hotelRooms[indexPath.row];
+    cell.textLabel.text = @"Test";
+//    cell.textLabel.text = [NSString stringWithFormat:@"Room %@", room.number];
     return cell;
 }
 
