@@ -37,7 +37,24 @@
     [AutoLayout leadingConstraintFrom:browseButton toView: self.view];
     [AutoLayout trailingConstraintFrom:browseButton toView: self.view];
     
-    NSLayoutConstraint *browseHeight = [AutoLayout genericConstraintFrom:browseButton toView:self.view withAttribute:NSLayoutAttributeHeight];
+    [AutoLayout leadingConstraintFrom:bookButton toView: self.view];
+    [AutoLayout trailingConstraintFrom:bookButton toView: self.view];
+    
+    [AutoLayout leadingConstraintFrom:lookUpButton toView: self.view];
+    [AutoLayout trailingConstraintFrom:lookUpButton toView: self.view];
+    
+    
+    NSLayoutConstraint *browseHeight = [AutoLayout genericConstraintFrom:browseButton toView:self.view withAttribute:NSLayoutAttributeTop];
+    browseHeight.constant = navBarHeight;
+    
+    NSLayoutConstraint *bookHeight = [AutoLayout genericConstraintFrom:bookButton toView:self.view withAttribute:NSLayoutAttributeCenterY];
+    bookHeight.constant = navBarHeight / 2;
+    
+    [AutoLayout genericConstraintFrom:lookUpButton toView:self.view withAttribute:NSLayoutAttributeBottom];
+
+    [AutoLayout genericConstraintFrom:bookButton toView:self.view withAttribute:NSLayoutAttributeHeight andMultiplier:0.33];
+    [AutoLayout equalHeightConstraintFromView:browseButton toView:bookButton withMultiplier:1.0];
+    [AutoLayout equalHeightConstraintFromView:bookButton toView:lookUpButton withMultiplier:1.0];
     
     [browseButton addTarget:self action:@selector(browseButtonSelected) forControlEvents:UIControlEventTouchUpInside];
     
@@ -47,7 +64,6 @@
     HotelsViewController *hotelsView = [[HotelsViewController alloc]init];
     NSLog(@"Work on this for lab!");
     [self.navigationController pushViewController:hotelsView animated:YES];
-//    [self presentViewController:hotelsView animated:YES completion:nil];
 }
 
 
