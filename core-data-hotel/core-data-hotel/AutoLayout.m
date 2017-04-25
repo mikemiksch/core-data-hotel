@@ -10,6 +10,34 @@
 
 @implementation AutoLayout
 
+//+ (void)datePickerVFLConstraintsForView:(NSDictionary *)viewDictionary withMetrics:(NSDictionary *)metricsDictionary {
+//    NSDictionary *viewDictionary = @{@"startDateLabel" : view};
+//    NSString *vflFormat = @"V:|-navBarHeight-[startDateLabel]-[startDate]-[endDateLabel]-[endDate]-|";
+//    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:vflFormat options:0 metrics:metricsDictionary views:viewDictionary];
+//    
+//    [NSLayoutConstraint activateConstraints:verticalConstraints];
+//}
+
+
++ (NSLayoutConstraint *)genericConstraintFrom:(UIView *)view
+                                       toView:(UIView *)superView
+                                withAttribute:(NSLayoutAttribute)attribute
+                                  andConstant:(CGFloat)constant {
+    
+    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:view
+                                                                  attribute:attribute
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:superView
+                                                                  attribute:attribute
+                                                                 multiplier:1.0
+                                                                   constant:constant];
+    
+    constraint.active = YES;
+    
+    return constraint;
+    
+}
+
 + (NSArray *)fullScreenContraintsWithVFLForView:(UIView *)view {
     NSMutableArray *constraints = [[NSMutableArray alloc]init];
     

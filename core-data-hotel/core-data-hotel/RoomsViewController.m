@@ -56,7 +56,6 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Room *room = self.hotelRooms[indexPath.row];
-//    cell.textLabel.text = @"Test";
     cell.textLabel.text = [[NSNumber numberWithUnsignedInteger:room.number]stringValue];
     return cell;
 }

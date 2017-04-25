@@ -10,10 +10,18 @@
 
 @interface AutoLayout : NSObject
 
++ (void)datePickerVFLConstraintsForView:(NSDictionary *)viewDictionary withMetrics:(NSDictionary *)metricsDictionary;
+
 + (NSLayoutConstraint *)genericConstraintFrom:(UIView *)view
                                        toView:(UIView *)superView
                                 withAttribute:(NSLayoutAttribute)attribute
                                 andMultiplier:(CGFloat)multiplier;
+
++ (NSLayoutConstraint *)genericConstraintFrom:(UIView *)view
+                                       toView:(UIView *)superView
+                                withAttribute:(NSLayoutAttribute)attribute
+                                andConstant:(CGFloat)constant;
+
 
 + (NSLayoutConstraint *)genericConstraintFrom:(UIView *)view
                                        toView:(UIView *)superView
