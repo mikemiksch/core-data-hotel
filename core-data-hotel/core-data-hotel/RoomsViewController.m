@@ -21,6 +21,7 @@
 -(void)loadView {
     [super loadView];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.hotelRooms = [[NSMutableArray alloc]init];
     [self allRooms];
     self.roomsTableView = [[UITableView alloc]init];
     [self setupLayout];
@@ -31,6 +32,7 @@
     [super viewDidLoad];
     self.roomsTableView.dataSource = self;
     [self.roomsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    NSLog(@"%@", NSStringFromClass([self.selectedHotel class]));
 }
 
 - (void)setupLayout {
@@ -41,8 +43,10 @@
 
 
 - (void)allRooms {
-    for (NSDictionary *room in self.selectedHotel.rooms) {
+    for (Room *room in _selectedHotel.rooms) {
+        NSLog(@"Hit allRooms method");
         [self.hotelRooms addObject:room];
+        NSLog(@"%@", self.hotelRooms);
     }
 }
 
@@ -53,6 +57,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     NSDictionary *room = self.hotelRooms[indexPath.row];
+    NSLog(@"%@", room[@"number"]);
     cell.textLabel.text = [NSString stringWithFormat:@"Room %@", room[@"number"]];
     return cell;
 }

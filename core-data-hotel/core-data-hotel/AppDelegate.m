@@ -49,7 +49,7 @@
     if (count == 0) {
         
         NSDictionary *hotels = [[NSDictionary alloc]init];
-//        NSDictionary *romms = [[NSDictionary alloc]init];
+//        NSDictionary *rooms = [[NSDictionary alloc]init];
         
         NSString *path = [[NSBundle mainBundle]pathForResource:@"hotels" ofType:@"json"];
         
