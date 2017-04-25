@@ -10,6 +10,7 @@
 		83480A9A1EAEA495004392EF /* HotelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83480A991EAEA495004392EF /* HotelsViewController.m */; };
 		83480AA81EAEAC1A004392EF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 83480AA71EAEAC1A004392EF /* main.m */; };
 		8368FF6C1EAEA2090019509C /* AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8368FF6B1EAEA2090019509C /* AutoLayout.m */; };
+		83918AA21EAFBC7500593150 /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83918AA11EAFBC7500593150 /* DatePickerViewController.m */; };
 		83C2A9E41EAE5ED500CCADAF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C2A9E31EAE5ED500CCADAF /* AppDelegate.m */; };
 		83C2A9E71EAE5ED600CCADAF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C2A9E61EAE5ED600CCADAF /* ViewController.m */; };
 		83C2A9ED1EAE5ED600CCADAF /* core_data_hotel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 83C2A9EB1EAE5ED600CCADAF /* core_data_hotel.xcdatamodeld */; };
@@ -26,6 +27,8 @@
 		83480AA71EAEAC1A004392EF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8368FF6A1EAEA2090019509C /* AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoLayout.h; path = "core-data-hotel/AutoLayout.h"; sourceTree = "<group>"; };
 		8368FF6B1EAEA2090019509C /* AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AutoLayout.m; path = "core-data-hotel/AutoLayout.m"; sourceTree = "<group>"; };
+		83918AA01EAFBC7500593150 /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DatePickerViewController.h; path = "core-data-hotel/DatePickerViewController.h"; sourceTree = "<group>"; };
+		83918AA11EAFBC7500593150 /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DatePickerViewController.m; path = "core-data-hotel/DatePickerViewController.m"; sourceTree = "<group>"; };
 		83C2A9DC1EAE5ED500CCADAF /* core-data-hotel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "core-data-hotel.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83C2A9E21EAE5ED500CCADAF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		83C2A9E31EAE5ED500CCADAF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -100,6 +103,8 @@
 			children = (
 				83C2A9E51EAE5ED500CCADAF /* ViewController.h */,
 				83C2A9E61EAE5ED600CCADAF /* ViewController.m */,
+				83918AA01EAFBC7500593150 /* DatePickerViewController.h */,
+				83918AA11EAFBC7500593150 /* DatePickerViewController.m */,
 				83480A981EAEA495004392EF /* HotelsViewController.h */,
 				83480A991EAEA495004392EF /* HotelsViewController.m */,
 				83DC3FAA1EAEC0F100A60CB2 /* RoomsViewController.h */,
@@ -200,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83918AA21EAFBC7500593150 /* DatePickerViewController.m in Sources */,
 				83C2A9E71EAE5ED600CCADAF /* ViewController.m in Sources */,
 				83480A9A1EAEA495004392EF /* HotelsViewController.m in Sources */,
 				83C2A9ED1EAE5ED600CCADAF /* core_data_hotel.xcdatamodeld in Sources */,
