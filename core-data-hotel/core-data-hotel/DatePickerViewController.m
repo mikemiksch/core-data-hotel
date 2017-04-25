@@ -21,8 +21,7 @@
 
 - (void)loadView {
     [super loadView];
-//    [self setupDatePickers];
-    [self setupLabels];
+    [self setupDatePickers];
     [self setupDoneButton];
     [self.view setBackgroundColor:[UIColor whiteColor]];
 }
@@ -36,8 +35,14 @@
     NSDate *chosenStartDate = self.startDate.date;
     NSDate *chosenEndDate = self.endDate.date;
     
-    if ([[NSDate date] timeIntervalSinceReferenceDate] > [chosenEndDate timeIntervalSinceReferenceDate]) {
+    if ([[NSDate date] timeIntervalSinceReferenceDate] > [chosenStartDate timeIntervalSinceReferenceDate]) {
     
+        self.startDate.date = [NSDate date];
+        return;
+        
+    }
+    
+    if ([self.endDate.date timeIntervalSinceReferenceDate] > [chosenEndDate timeIntervalSinceReferenceDate]) {
         self.endDate.date = [NSDate date];
         return;
     }
@@ -55,47 +60,44 @@
 }
 
 - (void)setupDatePickers {
+    UILabel *startDateLabel = [[UILabel alloc]init];
+    startDateLabel.text = @"Start Date";
+    
+    UILabel *endDateLabel = [[UILabel alloc]init];
+    endDateLabel.text = @"End Date:";
+    
     self.startDate = [[UIDatePicker alloc]init];
     self.startDate.datePickerMode = UIDatePickerModeDate;
     self.endDate = [[UIDatePicker alloc]init];
     self.endDate.datePickerMode = UIDatePickerModeDate;
     
+    [self.view addSubview:startDateLabel];
+    [self.view addSubview:endDateLabel];
     [self.view addSubview:self.startDate];
     [self.view addSubview:self.endDate];
 
+    startDateLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    endDateLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.startDate.translatesAutoresizingMaskIntoConstraints = NO;
     self.endDate.translatesAutoresizingMaskIntoConstraints = NO;
     
+    [AutoLayout leadingConstraintFrom:startDateLabel toView:self.view];
+    [AutoLayout trailingConstraintFrom:startDateLabel toView:self.view];
+    [AutoLayout genericConstraintFrom:startDateLabel toView:self.view withAttribute:NSLayoutAttributeTop andConstant:75.0];
+    
     [AutoLayout leadingConstraintFrom:self.startDate toView:self.view];
     [AutoLayout trailingConstraintFrom:self.startDate toView:self.view];
+    [AutoLayout genericConstraintFrom:self.startDate toView:startDateLabel withAttribute:NSLayoutAttributeTop andConstant:8.0];
+    
+    [AutoLayout leadingConstraintFrom:endDateLabel toView:self.view];
+    [AutoLayout trailingConstraintFrom:endDateLabel toView:self.view];
+    [AutoLayout genericConstraintFrom:endDateLabel toView:self.startDate withAttribute:NSLayoutAttributeBottom andConstant:16.0];
     
     [AutoLayout leadingConstraintFrom:self.endDate toView:self.view];
     [AutoLayout trailingConstraintFrom:self.endDate toView:self.view];
+    [AutoLayout genericConstraintFrom:self.endDate toView:self.startDate withAttribute:NSLayoutAttributeBottom andConstant:210.0];
 
-}
-- (void)setupLabels {
-    
-//    float navBarHeight = CGRectGetHeight(self.navigationController.navigationBar.frame);
-    
-    UILabel *startDateLabel = [[UILabel alloc]init];
-//    UILabel *endDateLabel = [[UILabel alloc]init];
-    
-    startDateLabel.text = @"Start Date:";
-//    endDateLabel.text = @"End Date:";
-    
-//    endDateLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    startDateLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [AutoLayout leadingConstraintFrom:startDateLabel toView:self.view];
-    [AutoLayout trailingConstraintFrom:startDateLabel toView:self.view];
-    [AutoLayout genericConstraintFrom:startDateLabel toView:self.view withAttribute:NSLayoutAttributeTop andConstant:20.0];
-    
-    
-//    [AutoLayout leadingConstraintFrom:endDateLabel toView:self.view];
-//    [AutoLayout trailingConstraintFrom:endDateLabel toView:self.view];
-    
-    [self.view addSubview:startDateLabel];
-//    [self.view addSubview:endDateLabel];
+
 }
 
 
