@@ -44,10 +44,10 @@
 
 - (void)allRooms {
     for (Room *room in _selectedHotel.rooms) {
-        NSLog(@"Hit allRooms method");
         [self.hotelRooms addObject:room];
-        NSLog(@"%@", self.hotelRooms);
+        NSLog(@"%@", room[@"number"]);
     }
+        NSLog(@"%@", self.hotelRooms);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section    {

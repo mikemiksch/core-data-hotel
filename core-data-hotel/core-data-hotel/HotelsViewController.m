@@ -82,7 +82,6 @@
     ;
     RoomsViewController *rooms = [[RoomsViewController alloc]init];
     rooms.selectedHotel = selectedHotel;
-    NSLog(@"%@", selectedHotel);
     [self.navigationController pushViewController:rooms animated:YES];
     
 }
