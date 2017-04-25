@@ -75,9 +75,9 @@
             for (NSDictionary *room in hotel[@"rooms"]) {
                 Room *newRoom = [NSEntityDescription insertNewObjectForEntityForName:@"Room" inManagedObjectContext:self.persistentContainer.viewContext];
                 
-                newRoom.number = (NSInteger)room[@"number"];
-                newRoom.beds = (NSInteger)room[@"beds"];
-                newRoom.rate = (NSInteger)room[@"rate"];
+                newRoom.number = [(NSNumber *)room[@"number"] intValue];
+                newRoom.beds = [(NSNumber *)room[@"beds"] intValue];
+                newRoom.rate = [(NSNumber *)room[@"rate"] floatValue];
                 
                 newRoom.hotel = newHotel;
             
