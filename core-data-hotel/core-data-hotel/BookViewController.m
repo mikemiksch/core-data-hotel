@@ -9,7 +9,10 @@
 #import "BookViewController.h"
 #import "Guest+CoreDataClass.h"
 #import "Guest+CoreDataProperties.h"
+#import "Reservation+CoreDataClass.h"
+#import "Reservation+CoreDataProperties.h"
 #import "AutoLayout.h"
+#import "AppDelegate.h"
 
 @interface BookViewController ()
 
@@ -17,6 +20,9 @@
 @property(strong, nonatomic) UITextField *firstName;
 @property(strong, nonatomic) UITextField *lastName;
 @property(strong, nonatomic) UITextField *email;
+@property(strong, nonatomic) Room *room;
+@property(strong, nonatomic) NSDate *startDate;
+@property(strong, nonatomic) NSDate *endDate;
 
 @end
 
@@ -25,12 +31,11 @@
 - (void)loadView {
     [super loadView];
     [self setupReservationInfo];
+    [self setupSaveButton];
     [self.view setBackgroundColor:[UIColor whiteColor]];
 }
 
 -(void)setupReservationInfo {
-    
-    UIButton *bookReservationButton = [self createButtonWithTitle:@"Book Reservation"];
     
     self.firstName = [[UITextField alloc]init];
     self.lastName = [[UITextField alloc]init];
@@ -60,32 +65,43 @@
     [AutoLayout trailingConstraintFrom:self.email toView:self.view];
     [AutoLayout genericConstraintFrom:self.email toView:self.view withAttribute:NSLayoutAttributeTop andConstant:125.0];
     
-    [AutoLayout leadingConstraintFrom:bookReservationButton toView:self.view];
-    [AutoLayout trailingConstraintFrom:bookReservationButton toView:self.view];
-    [AutoLayout genericConstraintFrom:bookReservationButton toView:self.view withAttribute:NSLayoutAttributeTop andConstant:150.0];
+}
+
+- (void)setupSaveButton {
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonPressed)];
+    [self.navigationItem setRightBarButtonItem:saveButton];
+}
+
+- (void)saveButtonSelected:(UIBarButtonItem *)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
     
-    [bookReservationButton addTarget:self action:@selector(bookReservationButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    Reservation *reservation = [NSEntityDescription insertNewObjectForEntityForName:@"reservation" inManagedObjectContext:context];
+    
+    reservation.startDate = [NSDate date];
+    reservation.endDate = self.endDate;
+    reservation.room = self.room;
+    
+    self.room.reservation = reservation;
+    
+    reservation.guest = [NSEntityDescription insertNewObjectForEntityForName:@"Guest" inManagedObjectContext:context];
+    reservation.guest.firstName = self.firstName.text;
+    reservation.guest.lastName = self.lastName.text;
+    reservation.guest.email = self.email.text;
+    
+    NSError *saveError;
+    [context save:&saveError];
+    
+    if (saveError) {
+        NSLog(@"Save error is %@", saveError);
+    } else {
+        NSLog(@"Reservation Saved Successfully");
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
     
 }
 
-- (UIButton *)createButtonWithTitle:(NSString *)title {
-    UIButton *button = [[UIButton alloc]init];
-    [button setTitle:title forState:normal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [button setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-    [self.view addSubview:button];
-    
-    return button;
-}
-
-- (void)bookReservationButtonPressed {
-    Guest *newGuest = [[Guest alloc]init];
-    NSLog(@"newGuest");
-//    newGuest.firstName = self.firstName.text;
-//    newGuest.lastName = self.lastName.text;
-//    newGuest.email = self.email.text;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
