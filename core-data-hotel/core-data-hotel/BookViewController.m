@@ -66,7 +66,7 @@
 }
 
 - (void)setupSaveButton {
-    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonPressed)];
+    UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveButtonPressed:)];
     [self.navigationItem setRightBarButtonItem:saveButton];
 }
 
@@ -74,13 +74,13 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
     
-    Reservation *reservation = [NSEntityDescription insertNewObjectForEntityForName:@"reservation" inManagedObjectContext:context];
+    Reservation *reservation = [NSEntityDescription insertNewObjectForEntityForName:@"Reservation" inManagedObjectContext:context];
     
     reservation.startDate = [NSDate date];
     reservation.endDate = self.endDate;
     reservation.room = self.room;
     
-    self.room.reservation = reservation;
+    self.room.reservation = [self.room.reservation setByAddingObject:reservation];
     
     reservation.guest = [NSEntityDescription insertNewObjectForEntityForName:@"Guest" inManagedObjectContext:context];
     reservation.guest.firstName = self.firstName.text;
