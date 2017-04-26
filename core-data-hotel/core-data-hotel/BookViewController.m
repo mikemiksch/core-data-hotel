@@ -70,7 +70,7 @@
     [self.navigationItem setRightBarButtonItem:saveButton];
 }
 
-- (void)saveButtonSelected:(UIBarButtonItem *)sender {
+- (void)saveButtonPressed:(UIBarButtonItem *)sender {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
     
