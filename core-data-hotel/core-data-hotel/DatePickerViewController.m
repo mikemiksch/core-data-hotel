@@ -14,6 +14,7 @@
 
 @property(strong, nonatomic) UIDatePicker *endDate;
 @property(strong, nonatomic) UIDatePicker *startDate;
+@property(strong, nonatomic) NSCalendar *calendar;
 
 @end
 
@@ -21,6 +22,7 @@
 
 - (void)loadView {
     [super loadView];
+    self.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     [self setupDatePickers];
     [self setupDoneButton];
     [self.view setBackgroundColor:[UIColor whiteColor]];
@@ -34,40 +36,21 @@
 - (void)doneButtonPressed {
     NSDate *chosenStartDate = self.startDate.date;
     NSDate *chosenEndDate = self.endDate.date;
-//    
-//    if ([[NSDate date] timeIntervalSinceReferenceDate] > [chosenStartDate timeIntervalSinceReferenceDate]) {
-//        self.startDate.date = [NSDate date];
-//        
-//    }
-//    
-//    if (chosenEndDate < chosenStartDate) {
-//        self.endDate.date = chosenStartDate;
-//
-//    }
-//        if ([NSDate date] <= chosenStartDate && chosenEndDate >= chosenStartDate){
-        AvailabilityViewController *availabilityController = [[AvailabilityViewController alloc]init];
-        availabilityController.endDate = chosenEndDate;
-        availabilityController.startDate = chosenStartDate;
-        [self.navigationController pushViewController:availabilityController animated:YES];
-//        } else {
-//            UIAlertController * alert=   [UIAlertController
-//                                          alertControllerWithTitle:@"Invalid Selection!"
-//                                          message:@"Please enter a valid date range!"
-//                                          preferredStyle:UIAlertControllerStyleAlert];
-//            
-//            [self presentViewController:alert animated:YES completion:nil];
-//            UIAlertAction* ok = [UIAlertAction
-//                                 actionWithTitle:@"OK"
-//                                 style:UIAlertActionStyleDefault
-//                                 handler:^(UIAlertAction * action)
-//                                 {
-//                                     [self dismissViewControllerAnimated:YES completion:nil];
-//                                     
-//                                 }];
-//            [alert addAction:ok];
-//        }
-    NSLog(@"%@", self.startDate.date);
-    NSLog(@"%@", self.endDate.date);
+    //
+    //    if ([[NSDate date] timeIntervalSinceReferenceDate] > [chosenStartDate timeIntervalSinceReferenceDate]) {
+    //        self.startDate.date = [NSDate date];
+    //
+    //    }
+    
+    AvailabilityViewController *availabilityController = [[AvailabilityViewController alloc]init];
+    availabilityController.endDate = chosenEndDate;
+    availabilityController.startDate = chosenStartDate;
+    [self.navigationController pushViewController:availabilityController animated:YES];
+    
+}
+
+- (void)updateEndDate {
+    self.endDate.minimumDate = [self.calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:self.startDate.date options:NSCalendarMatchFirst];
 }
 
 - (void)viewDidLoad {
@@ -76,6 +59,9 @@
 }
 
 - (void)setupDatePickers {
+    
+    NSDate *minimumDate = [NSDate date];
+    
     UILabel *startDateLabel = [[UILabel alloc]init];
     startDateLabel.text = @"Start Date";
     
@@ -84,14 +70,16 @@
     
     self.startDate = [[UIDatePicker alloc]init];
     self.startDate.datePickerMode = UIDatePickerModeDate;
+    self.startDate.minimumDate = minimumDate;
     self.endDate = [[UIDatePicker alloc]init];
     self.endDate.datePickerMode = UIDatePickerModeDate;
+    self.endDate.minimumDate = minimumDate;
     
     [self.view addSubview:startDateLabel];
     [self.view addSubview:endDateLabel];
     [self.view addSubview:self.startDate];
     [self.view addSubview:self.endDate];
-
+    
     startDateLabel.translatesAutoresizingMaskIntoConstraints = NO;
     endDateLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.startDate.translatesAutoresizingMaskIntoConstraints = NO;
@@ -112,8 +100,11 @@
     [AutoLayout leadingConstraintFrom:self.endDate toView:self.view];
     [AutoLayout trailingConstraintFrom:self.endDate toView:self.view];
     [AutoLayout genericConstraintFrom:self.endDate toView:self.startDate withAttribute:NSLayoutAttributeBottom andConstant:210.0];
-
-
+    
+    [self updateEndDate];
+    
+    [self.startDate addTarget:self action:@selector(updateEndDate) forControlEvents:UIControlEventValueChanged];
+    
 }
 
 
