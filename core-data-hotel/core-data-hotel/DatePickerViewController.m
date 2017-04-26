@@ -43,12 +43,13 @@
 //    if (chosenEndDate < chosenStartDate) {
 //        self.endDate.date = chosenStartDate;
 //
-//    } if ([NSDate date] <= chosenStartDate && chosenEndDate >= chosenStartDate){
+//    }
+        if ([NSDate date] <= chosenStartDate && chosenEndDate >= chosenStartDate){
         AvailabilityViewController *availabilityController = [[AvailabilityViewController alloc]init];
         availabilityController.endDate = chosenEndDate;
         availabilityController.startDate = chosenStartDate;
         [self.navigationController pushViewController:availabilityController animated:YES];
-//    }
+    }
     
 }
 
