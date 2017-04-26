@@ -51,8 +51,87 @@
     
     XCTAssert([constraint isKindOfClass:[NSLayoutConstraint class]], @"constraint is not an instance of NSLayoutConstraint");
     
-    XCTAssertTrue([(NSLayoutConstraint *)constraint isActive], @"Constraint was not activated");
+    XCTAssert([(NSLayoutConstraint *)constraint isActive], @"constraint was not activated");
     
+}
+
+//Tests written for lab
+
+- (void)testGenericConstraintFromViewToViewWithAttributeAndMultiplier {
+    XCTAssertNotNil(self.testController, @"The testController is nil!");
+    XCTAssertNotNil(self.testView1, @"TestView1 is nil!");
+    XCTAssertNotNil(self.testView2, @"TestView2 is nil!");
+    
+    id constraint = [AutoLayout genericConstraintFrom:self.testView1 toView:self.testView2 withAttribute:NSLayoutAttributeTop andMultiplier:1.0];
+    
+    //Repeated assertions from above
+    XCTAssert([constraint isKindOfClass:[NSLayoutConstraint class]], @"constraint is not an instance of NSLayoutConstraint");
+    XCTAssertTrue([(NSLayoutConstraint *)constraint isActive], @"constraint was not activated");
+}
+
+- (void)testGenericConstraintFromViewToViewWithAttributeAndConstant {
+    XCTAssertNotNil(self.testController, @"The testController is nil!");
+    XCTAssertNotNil(self.testView1, @"TestView1 is nil!");
+    XCTAssertNotNil(self.testView2, @"TestView2 is nil!");
+    
+    id constraint = [AutoLayout genericConstraintFrom:self.testView1 toView:self.testView2 withAttribute:NSLayoutAttributeTop andConstant:1.0];
+
+    XCTAssert([constraint isKindOfClass:[NSLayoutConstraint class]], @"constraint is not an instance of NSLayoutConstraint");
+    XCTAssert([(NSLayoutConstraint *)constraint isActive], @"constraint was not activated");
+}
+
+- (void)testFullScreenContraintsWithVFLForView {
+    XCTAssertNotNil(self.testController, @"The testController is nil!");
+    XCTAssertNotNil(self.testView1, @"TestView1 is nil!");
+    XCTAssertNotNil(self.testView2, @"TestView2 is nil!");
+    
+    //Method logic
+    NSMutableArray *constraints = [[NSMutableArray alloc]init];
+    NSDictionary *viewDictionary = @{@"view": self.testView1};
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[view]|"
+                                                                            options:0
+                                                                             metrics:nil
+                                                                               views:viewDictionary];
+    
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|"
+                                                                          options:0
+                                                                          metrics:nil
+                                                                            views:viewDictionary];
+    
+    [constraints addObjectsFromArray:horizontalConstraints];
+    [constraints addObjectsFromArray:verticalConstraints];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
+    
+    XCTAssert([constraints isKindOfClass:[NSMutableArray class]], @"constraints is not an instance of NSMutableArray");
+    XCTAssert([viewDictionary isKindOfClass:[NSDictionary class]], @"viewDictionary is not an instance of NSDictionary");
+    XCTAssert([horizontalConstraints isKindOfClass:[NSArray class]], @"horizontalConstraints is not an instance of NSArray");
+    XCTAssert([verticalConstraints isKindOfClass:[NSArray class]], @"verticalConstraints is not an instance of NSArray");
+    XCTAssert([constraints[0] isKindOfClass:[NSLayoutConstraint class]], @"horizontalConstraints is not an instance of NSLayoutConstraint");
+    XCTAssert([constraints[1] isKindOfClass:[NSLayoutConstraint class]], @"verticalConstraints is not an instance of NSLayoutConstraint");
+    XCTAssert([constraints[0] isActive], @"horizontalConstraints is not active");
+    XCTAssert([constraints[1] isActive], @"verticalConstraints is not active");
+    
+}
+
+- (void)testEqualHeightConstraintFromViewToViewWithMultiplier {
+    XCTAssertNotNil(self.testController, @"The testController is nil!");
+    XCTAssertNotNil(self.testView1, @"TestView1 is nil!");
+    XCTAssertNotNil(self.testView2, @"TestView2 is nil!");
+    
+    id constraint = [AutoLayout equalHeightConstraintFromView:self.testView1 toView:self.testView2 withMultiplier:1.0];
+    XCTAssert([constraint isKindOfClass:[NSLayoutConstraint class]], @"constraint is not an instance of NSLayoutConstraint");
+    XCTAssert([(NSLayoutConstraint *)constraint isActive], @"constraint was not activated");
+}
+
+- (void)testLeadingConstraintFromToView {
+    XCTAssertNotNil(self.testController, @"The testController is nil!");
+    XCTAssertNotNil(self.testView1, @"TestView1 is nil!");
+    XCTAssertNotNil(self.testView2, @"TestView2 is nil!");
+    
+    id constraint = [AutoLayout leadingConstraintFrom:self.testView1 toView:self.testView2];
+    XCTAssert([constraint isKindOfClass:[NSLayoutConstraint class]], @"constaint is not an instance of NSLayoutConstraint");
+    XCTAssert([(NSLayoutConstraint *)constraint isActive], @"constraint was not activated");
 }
 
 @end
