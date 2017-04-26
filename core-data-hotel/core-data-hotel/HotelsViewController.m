@@ -79,7 +79,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Hotel *selectedHotel = _allHotels[indexPath.row];
-    ;
     RoomsViewController *rooms = [[RoomsViewController alloc]init];
     rooms.selectedHotel = selectedHotel;
     [self.navigationController pushViewController:rooms animated:YES];

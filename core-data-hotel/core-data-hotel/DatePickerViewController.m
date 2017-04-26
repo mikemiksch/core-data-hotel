@@ -34,23 +34,21 @@
 - (void)doneButtonPressed {
     NSDate *chosenStartDate = self.startDate.date;
     NSDate *chosenEndDate = self.endDate.date;
-    
-    if ([[NSDate date] timeIntervalSinceReferenceDate] > [chosenStartDate timeIntervalSinceReferenceDate]) {
-    
-        self.startDate.date = [NSDate date];
-        return;
-        
-    }
-    
-    if ([self.endDate.date timeIntervalSinceReferenceDate] > [chosenEndDate timeIntervalSinceReferenceDate]) {
-        self.endDate.date = [NSDate date];
-        return;
-    }
-    
-    AvailabilityViewController *availabilityController = [[AvailabilityViewController alloc]init];
-    availabilityController.endDate = chosenEndDate;
-    availabilityController.startDate = chosenStartDate;
-    [self.navigationController pushViewController:availabilityController animated:YES];
+//    
+//    if ([[NSDate date] timeIntervalSinceReferenceDate] > [chosenStartDate timeIntervalSinceReferenceDate]) {
+//        self.startDate.date = [NSDate date];
+//        
+//    }
+//    
+//    if (chosenEndDate < chosenStartDate) {
+//        self.endDate.date = chosenStartDate;
+//
+//    } if ([NSDate date] <= chosenStartDate && chosenEndDate >= chosenStartDate){
+        AvailabilityViewController *availabilityController = [[AvailabilityViewController alloc]init];
+        availabilityController.endDate = chosenEndDate;
+        availabilityController.startDate = chosenStartDate;
+        [self.navigationController pushViewController:availabilityController animated:YES];
+//    }
     
 }
 

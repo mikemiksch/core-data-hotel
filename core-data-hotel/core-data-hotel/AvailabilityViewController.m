@@ -13,8 +13,9 @@
 #import "Reservation+CoreDataProperties.h"
 #import "Room+CoreDataClass.h"
 #import "Room+CoreDataProperties.h"
+#import "BookViewController.h"
 
-@interface AvailabilityViewController () <UITableViewDataSource>
+@interface AvailabilityViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property(strong, nonatomic) UITableView *availabilityTableView;
 
@@ -65,6 +66,7 @@
 - (void)setupTableView {
     self.availabilityTableView = [[UITableView alloc]init];
     self.availabilityTableView.dataSource = self;
+    self.availabilityTableView.delegate = self;
     [self.view addSubview:self.availabilityTableView];
     [self.availabilityTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
     self.availabilityTableView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -72,15 +74,23 @@
 }
 
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.availableRooms.count;
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Room *currentRoom = self.availableRooms[indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%i", currentRoom.number];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Room *selectedRoom = self.availableRooms[indexPath.row];
+    BookViewController *bookingView = [[BookViewController alloc]init];
+    bookingView.selectedRoom = selectedRoom;
+    [self.navigationController pushViewController:bookingView animated:YES];
 }
 
 @end
