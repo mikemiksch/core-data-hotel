@@ -13,6 +13,8 @@
 #import "Hotel+CoreDataProperties.h"
 #import "Room+CoreDataClass.h"
 #import "Room+CoreDataProperties.h"
+#import "Guest+CoreDataClass.h"
+#import "Guest+CoreDataProperties.h"
 
 
 @interface AppDelegate ()

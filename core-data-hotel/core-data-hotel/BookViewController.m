@@ -29,6 +29,9 @@
 }
 
 -(void)setupReservationInfo {
+    
+    UIButton *bookReservationButton = [self createButtonWithTitle:@"Book Reservation"];
+    
     self.firstName = [[UITextField alloc]init];
     self.lastName = [[UITextField alloc]init];
     self.email = [[UITextField alloc]init];
@@ -56,6 +59,32 @@
     [AutoLayout leadingConstraintFrom:self.email toView:self.view];
     [AutoLayout trailingConstraintFrom:self.email toView:self.view];
     [AutoLayout genericConstraintFrom:self.email toView:self.view withAttribute:NSLayoutAttributeTop andConstant:125.0];
+    
+    [AutoLayout leadingConstraintFrom:bookReservationButton toView:self.view];
+    [AutoLayout trailingConstraintFrom:bookReservationButton toView:self.view];
+    [AutoLayout genericConstraintFrom:bookReservationButton toView:self.view withAttribute:NSLayoutAttributeTop andConstant:150.0];
+    
+    [bookReservationButton addTarget:self action:@selector(bookReservationButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+- (UIButton *)createButtonWithTitle:(NSString *)title {
+    UIButton *button = [[UIButton alloc]init];
+    [button setTitle:title forState:normal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [self.view addSubview:button];
+    
+    return button;
+}
+
+- (void)bookReservationButtonPressed {
+    Guest *newGuest = [[Guest alloc]init];
+    NSLog(@"newGuest");
+//    newGuest.firstName = self.firstName.text;
+//    newGuest.lastName = self.lastName.text;
+//    newGuest.email = self.email.text;
 }
 
 - (void)viewDidLoad {

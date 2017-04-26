@@ -44,28 +44,30 @@
 //        self.endDate.date = chosenStartDate;
 //
 //    }
-        if ([NSDate date] <= chosenStartDate && chosenEndDate >= chosenStartDate){
+//        if ([NSDate date] <= chosenStartDate && chosenEndDate >= chosenStartDate){
         AvailabilityViewController *availabilityController = [[AvailabilityViewController alloc]init];
         availabilityController.endDate = chosenEndDate;
         availabilityController.startDate = chosenStartDate;
         [self.navigationController pushViewController:availabilityController animated:YES];
-        } else {
-            UIAlertController * alert=   [UIAlertController
-                                          alertControllerWithTitle:@"Invalid Selection!"
-                                          message:@"Please enter a valid date range!"
-                                          preferredStyle:UIAlertControllerStyleAlert];
-            
-            [self presentViewController:alert animated:YES completion:nil];
-            UIAlertAction* ok = [UIAlertAction
-                                 actionWithTitle:@"OK"
-                                 style:UIAlertActionStyleDefault
-                                 handler:^(UIAlertAction * action)
-                                 {
-                                     [self dismissViewControllerAnimated:YES completion:nil];
-                                     
-                                 }];
-            [alert addAction:ok];
-        }
+//        } else {
+//            UIAlertController * alert=   [UIAlertController
+//                                          alertControllerWithTitle:@"Invalid Selection!"
+//                                          message:@"Please enter a valid date range!"
+//                                          preferredStyle:UIAlertControllerStyleAlert];
+//            
+//            [self presentViewController:alert animated:YES completion:nil];
+//            UIAlertAction* ok = [UIAlertAction
+//                                 actionWithTitle:@"OK"
+//                                 style:UIAlertActionStyleDefault
+//                                 handler:^(UIAlertAction * action)
+//                                 {
+//                                     [self dismissViewControllerAnimated:YES completion:nil];
+//                                     
+//                                 }];
+//            [alert addAction:ok];
+//        }
+    NSLog(@"%@", self.startDate.date);
+    NSLog(@"%@", self.endDate.date);
 }
 
 - (void)viewDidLoad {
