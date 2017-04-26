@@ -20,9 +20,7 @@
 @property(strong, nonatomic) UITextField *firstName;
 @property(strong, nonatomic) UITextField *lastName;
 @property(strong, nonatomic) UITextField *email;
-@property(strong, nonatomic) Room *room;
-@property(strong, nonatomic) NSDate *startDate;
-@property(strong, nonatomic) NSDate *endDate;
+
 
 @end
 
