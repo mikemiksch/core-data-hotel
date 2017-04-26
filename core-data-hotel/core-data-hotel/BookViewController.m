@@ -9,6 +9,7 @@
 #import "BookViewController.h"
 #import "Guest+CoreDataClass.h"
 #import "Guest+CoreDataProperties.h"
+#import "AutoLayout.h"
 
 @interface BookViewController ()
 
@@ -44,7 +45,17 @@
     self.lastName.translatesAutoresizingMaskIntoConstraints = NO;
     self.email.translatesAutoresizingMaskIntoConstraints = NO;
     
+    [AutoLayout leadingConstraintFrom:self.firstName toView:self.view];
+    [AutoLayout trailingConstraintFrom:self.firstName toView:self.view];
+    [AutoLayout genericConstraintFrom:self.firstName toView:self.view withAttribute:NSLayoutAttributeTop andConstant:75.0];
     
+    [AutoLayout leadingConstraintFrom:self.lastName toView:self.view];
+    [AutoLayout trailingConstraintFrom:self.lastName toView:self.view];
+    [AutoLayout genericConstraintFrom:self.lastName toView:self.view withAttribute:NSLayoutAttributeTop andConstant:100.0];
+    
+    [AutoLayout leadingConstraintFrom:self.email toView:self.view];
+    [AutoLayout trailingConstraintFrom:self.email toView:self.view];
+    [AutoLayout genericConstraintFrom:self.email toView:self.view withAttribute:NSLayoutAttributeTop andConstant:125.0];
 }
 
 - (void)viewDidLoad {
