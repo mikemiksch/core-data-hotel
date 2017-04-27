@@ -7,6 +7,7 @@
 //
 
 #import "HotelsViewController.h"
+#import <Crashlytics/Crashlytics.h>
 
 @interface HotelsViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -57,6 +58,7 @@
         
         if (fetchError) {
             NSLog(@"There was an error fetching hotels from Core Data!");
+            [Answers logCustomEventWithName:@"There was an error fetching hotels from Core Data" customAttributes:nil];
         }
         
         _allHotels = hotels;

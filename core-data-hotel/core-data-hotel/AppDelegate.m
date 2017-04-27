@@ -50,6 +50,7 @@
     
     if (error) {
         NSLog(@"%@", error.localizedDescription);
+        [Answers logCustomEventWithName:@"Error fetching hotels." customAttributes:nil];
     }
     
     if (count == 0) {
@@ -66,6 +67,7 @@
         
         if (jsonError) {
             NSLog(@"%@", jsonError.localizedDescription);
+            [Answers logCustomEventWithName:@"Error parsing jSON" customAttributes:nil];
         }
         
         hotels = jsonDictionary[@"Hotels"];
@@ -97,6 +99,7 @@
         
         if (saveError) {
             NSLog(@"There was an error saving to Core Data");
+            [Answers logCustomEventWithName:@"Error saving to Core Data" customAttributes:nil];
         } else {
             NSLog(@"Successfully saved to Core Data");
         }
