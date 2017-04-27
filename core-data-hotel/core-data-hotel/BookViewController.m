@@ -86,6 +86,7 @@
     reservation.guest.firstName = self.firstName.text;
     reservation.guest.lastName = self.lastName.text;
     reservation.guest.email = self.email.text;
+    reservation.guest.fullName = @"%@ %@", self.firstName.text, self.lastName.text;
     
     NSError *saveError;
     [context save:&saveError];

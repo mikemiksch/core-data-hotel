@@ -3,6 +3,7 @@
     <entity name="Guest" representedClassName="Guest" syncable="YES" codeGenerationType="class">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="reservation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Reservation" inverseName="guest" inverseEntity="Reservation" syncable="YES"/>
     </entity>
@@ -26,7 +27,7 @@
         <relationship name="reservation" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Reservation" inverseName="room" inverseEntity="Reservation" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Guest" positionX="216" positionY="-165" width="128" height="103"/>
+        <element name="Guest" positionX="216" positionY="-165" width="128" height="118"/>
         <element name="Hotel" positionX="-308" positionY="-153" width="128" height="103"/>
         <element name="Reservation" positionX="72" positionY="-351" width="128" height="103"/>
         <element name="Room" positionX="-99" positionY="-243" width="128" height="118"/>
