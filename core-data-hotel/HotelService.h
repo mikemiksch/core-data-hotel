@@ -18,4 +18,6 @@
 
 + (void)makeReservation:(NSDate *)startDate to:(NSDate *)endDate in:(Room *)room for:(Guest *)guest appDelegate:(AppDelegate *)appDelegate context:(NSManagedObjectContext *)context;
 
++ (NSFetchedResultsController *)checkAvailability:(NSDate *)startDate to:(NSDate *)endDate appDelegate:(AppDelegate *)appDelegate context:(NSManagedObjectContext *)context;
+
 @end
