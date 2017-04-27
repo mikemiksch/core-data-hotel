@@ -10,6 +10,7 @@
 #import "AutoLayout.h"
 #import "HotelsViewController.h"
 #import "DatePickerViewController.h"
+#import "LookUpReservationController.h"
 
 @interface ViewController ()
 
@@ -71,6 +72,10 @@
     [self.navigationController pushViewController:datePicker animated:YES];
 }
 
+- (void)lookUpButtonSelected {
+    LookUpReservationController *reservations = [[LookUpReservationController alloc]init];
+    [self.navigationController pushViewController:reservations animated:YES];
+}
 
 - (UIButton *)createButtonWithTitle:(NSString *)title {
     
