@@ -20,7 +20,6 @@
 
 @interface LookUpReservationController () <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 
-//@property(strong, nonatomic) NSArray *allReservations;
 @property(strong, nonatomic) NSFetchedResultsController *allReservations;
 @property(strong, nonatomic) UITableView *reservationsTableView;
 @property(strong, nonatomic) UISearchBar *searchBar;

@@ -32,36 +32,8 @@
     if (!_availableRooms) {
         AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
         NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
-//        _availableRooms = [HotelService checkAvailability:self.startDate to:self.endDate appDelegate:appDelegate context:context];
-        
-        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Reservation"];
-        request.predicate = [NSPredicate predicateWithFormat:@"startDate <= %@ AND endDate >= %@", self.endDate, self.startDate];
-        
-        NSError *roomError;
-        NSArray *results = [context executeFetchRequest:request error:&roomError];
-        
-        NSMutableArray *unavailableRooms = [[NSMutableArray alloc]init];
-        
-        for (Reservation *reservation in results) {
-            [unavailableRooms addObject:reservation.room];
-        }
-        
-        NSFetchRequest *roomRequest = [NSFetchRequest fetchRequestWithEntityName:@"Room"];
-        roomRequest.predicate = [NSPredicate predicateWithFormat:@"NOT self IN %@", unavailableRooms];
-        
-        NSSortDescriptor *roomSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"hotel.name" ascending:YES];
-        
-        NSSortDescriptor *roomNumberSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES];
-        
-        roomRequest.sortDescriptors = @[roomSortDescriptor, roomNumberSortDescriptor];
-        
-        NSError *availableRoomError;
-        
-        _availableRooms = [[NSFetchedResultsController alloc] initWithFetchRequest:roomRequest managedObjectContext:context sectionNameKeyPath:@"hotel.name" cacheName:nil];
-        
-        [_availableRooms performFetch:&availableRoomError];
+        _availableRooms = [HotelService checkAvailability:self.startDate to:self.endDate appDelegate:appDelegate context:context];
     }
-    
     return _availableRooms;
 }
 

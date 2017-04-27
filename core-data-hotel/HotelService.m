@@ -44,7 +44,7 @@
     request.predicate = [NSPredicate predicateWithFormat:@"startDate <=  %@ AND endDate >= %@", endDate, startDate];
     
     NSError *roomError;
-    NSArray *results = [context executeRequest:request error:&roomError];
+    NSArray *results = [context executeFetchRequest:request error:&roomError];
     
     NSMutableArray *unavailableRooms = [[NSMutableArray alloc]init];
     
