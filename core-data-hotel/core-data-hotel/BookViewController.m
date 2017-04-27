@@ -74,16 +74,19 @@
 
 - (void)saveButtonPressed:(UIBarButtonItem *)sender {
     
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
-    NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
+    if(![[self.firstName text]  isEqual: @""] && ![[self.lastName text]  isEqual: @""] && ![[self.email text]  isEqual: @""]) {
     
-    Guest *guest = [NSEntityDescription insertNewObjectForEntityForName:@"Guest" inManagedObjectContext:context];
-    guest.firstName = self.firstName.text;
-    guest.lastName = self.lastName.text;
-    guest.email = self.email.text;
-    guest.fullName = @"%@ %@", [guest firstName], [guest lastName];
-    [HotelService makeReservation:self.startDate to:self.endDate in:_room for:guest appDelegate:appDelegate context:context];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+        NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
+    
+        Guest *guest = [NSEntityDescription insertNewObjectForEntityForName:@"Guest" inManagedObjectContext:context];
+        guest.firstName = self.firstName.text;
+        guest.lastName = self.lastName.text;
+        guest.email = self.email.text;
+        [HotelService makeReservation:self.startDate to:self.endDate in:_room for:guest appDelegate:appDelegate context:context];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+   
+    }
 
 }
 
