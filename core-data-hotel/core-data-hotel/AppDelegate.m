@@ -15,6 +15,9 @@
 #import "Room+CoreDataProperties.h"
 #import "Guest+CoreDataClass.h"
 #import "Guest+CoreDataProperties.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 
 @interface AppDelegate ()
@@ -32,7 +35,8 @@
    
     [self setupRootViewController];
     [self bootstrapApp];
-    
+    [Fabric with:@[[Crashlytics class]]];
+
     return YES;
 }
 
@@ -79,7 +83,7 @@
                 
                 newRoom.number = [(NSNumber *)room[@"number"] intValue];
                 newRoom.beds = [(NSNumber *)room[@"beds"] intValue];
-                newRoom.rate = [(NSNumber *)room[@"rate"] floatValue];
+                newRoom.cost = [(NSNumber *)room[@"cost"] floatValue];
                 
                 newRoom.hotel = newHotel;
             

@@ -12,6 +12,8 @@
 #import "DatePickerViewController.h"
 #import "LookUpReservationController.h"
 
+#import <Crashlytics/Crashlytics.h>
+
 @interface ViewController ()
 
 @end
@@ -65,16 +67,19 @@
 
 - (void)browseButtonSelected {
     HotelsViewController *hotelsView = [[HotelsViewController alloc]init];
+    [Answers logCustomEventWithName:@"ViewController - Browse Button Pressed" customAttributes:nil];
     [self.navigationController pushViewController:hotelsView animated:YES];
 }
 
 - (void)bookButtonSelected {
     DatePickerViewController *datePicker = [[DatePickerViewController alloc]init];
+    [Answers logCustomEventWithName:@"ViewController - Book Button Pressed" customAttributes:nil];
     [self.navigationController pushViewController:datePicker animated:YES];
 }
 
 - (void)lookUpButtonSelected {
     LookUpReservationController *reservations = [[LookUpReservationController alloc]init];
+    [Answers logCustomEventWithName:@"ViewController - Look Up Button Pressed" customAttributes:nil];
     [self.navigationController pushViewController:reservations animated:YES];
 }
 

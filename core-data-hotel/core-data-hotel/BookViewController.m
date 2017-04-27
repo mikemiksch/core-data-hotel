@@ -13,6 +13,8 @@
 #import "Reservation+CoreDataProperties.h"
 #import "AutoLayout.h"
 #import "AppDelegate.h"
+#import <Crashlytics/Crashlytics.h>
+#import "HotelService.h"
 
 @interface BookViewController ()
 
@@ -71,34 +73,18 @@
 }
 
 - (void)saveButtonPressed:(UIBarButtonItem *)sender {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
     
-    Reservation *reservation = [NSEntityDescription insertNewObjectForEntityForName:@"Reservation" inManagedObjectContext:context];
-    
-    reservation.startDate = [NSDate date];
-    reservation.endDate = self.endDate;
-    reservation.room = self.room;
-    
-    self.room.reservation = [self.room.reservation setByAddingObject:reservation];
-    
-    reservation.guest = [NSEntityDescription insertNewObjectForEntityForName:@"Guest" inManagedObjectContext:context];
-    reservation.guest.firstName = self.firstName.text;
-    reservation.guest.lastName = self.lastName.text;
-    reservation.guest.email = self.email.text;
-    reservation.guest.fullName = @"%@ %@", self.firstName.text, self.lastName.text;
-    
-    NSError *saveError;
-    [context save:&saveError];
-    
-    if (saveError) {
-        NSLog(@"Save error is %@", saveError);
-    } else {
-        NSLog(@"Reservation Saved Successfully");
-        
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
-    
+    Guest *guest = [NSEntityDescription insertNewObjectForEntityForName:@"Guest" inManagedObjectContext:context];
+    guest.firstName = self.firstName.text;
+    guest.lastName = self.lastName.text;
+    guest.email = self.email.text;
+    guest.fullName = @"%@ %@", [guest firstName], [guest lastName];
+    [HotelService makeReservation:self.startDate to:self.endDate in:_room for:guest appDelegate:appDelegate context:context];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+
 }
 
 

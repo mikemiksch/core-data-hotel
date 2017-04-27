@@ -54,8 +54,6 @@
         
         NSError *availableRoomError;
         
-//        _availableRooms = [appDelegate.persistentContainer.viewContext executeFetchRequest:roomRequest error:&availableRoomError];
-        
         _availableRooms = [[NSFetchedResultsController alloc] initWithFetchRequest:roomRequest managedObjectContext:appDelegate.persistentContainer.viewContext sectionNameKeyPath:@"hotel.name" cacheName:nil];
         
         [_availableRooms performFetch:&availableRoomError];
