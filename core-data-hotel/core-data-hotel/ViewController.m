@@ -60,6 +60,7 @@
     
     [browseButton addTarget:self action:@selector(browseButtonSelected) forControlEvents:UIControlEventTouchUpInside];
     [bookButton addTarget:self action:@selector(bookButtonSelected) forControlEvents:UIControlEventTouchUpInside];
+    [lookUpButton addTarget:self action:@selector(lookUpButtonSelected) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)browseButtonSelected {

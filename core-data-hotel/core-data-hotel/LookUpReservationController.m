@@ -20,6 +20,7 @@
 
 @interface LookUpReservationController () <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 
+//@property(strong, nonatomic) NSArray *allReservations;
 @property(strong, nonatomic) NSFetchedResultsController *allReservations;
 @property(strong, nonatomic) UITableView *reservationsTableView;
 @property(strong, nonatomic) UISearchBar *searchBar;
@@ -27,6 +28,23 @@
 @end
 
 @implementation LookUpReservationController
+
+//- (NSArray *)allReservations {
+//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+//    NSManagedObjectContext *context = appDelegate.persistentContainer.viewContext;
+//    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Reservation"];
+//    
+//    NSError *fetchError;
+//    NSArray *reservations = [context executeRequest:request error:&fetchError];
+//    
+//    if (fetchError) {
+//        NSLog(@"There was an error fetching reservations from Core Data!");
+//    }
+//    
+//    _allReservations = reservations;
+//
+//    return _allReservations;
+//}
 
 - (NSFetchedResultsController *)reservations {
     if (!_allReservations) {
@@ -37,8 +55,8 @@
         NSError *reservationFetchError;
         NSArray *results = [appDelegate.persistentContainer.viewContext executeRequest:request error:&reservationFetchError];
         NSSortDescriptor *guestSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"guest.fullName" ascending:YES];
-        NSSortDescriptor *roomSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"hotel" ascending:YES];
-        request.sortDescriptors = @[guestSortDescriptor, roomSortDescriptor];
+//        NSSortDescriptor *roomSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"hotel" ascending:YES];
+        request.sortDescriptors = @[guestSortDescriptor];
         NSError *reservationListError;
         
         _allReservations = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:appDelegate.persistentContainer.viewContext sectionNameKeyPath:@"guest.fullName" cacheName:nil];
@@ -56,6 +74,7 @@
 }
 
 - (void)setupTableView {
+    [self allReservations];
     self.reservationsTableView = [[UITableView alloc]init];
     self.reservationsTableView.dataSource = self;
     self.reservationsTableView.delegate = self;
@@ -72,15 +91,38 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    id<NSFetchedResultsSectionInfo> sectionInfo = [[self.reservationsTableView sections]objectAtIndex: section];
-    return [sectionInfo numberOfObjects];
+//    id<NSFetchedResultsSectionInfo> sectionInfo = [[self.reservationsTableView sections]objectAtIndex: section];
+    return [[self.allReservations fetchedObjects]count];
 }
+
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    return [_allReservations count];
+//}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Reservation *currentReservation = [self.allReservations objectAtIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ Room: %i", currentReservation.room.hotel, currentReservation.room.number];
+//    cell.textLabel.text = [NSString stringWithFormat:@"%@ Room: %i", currentReservation.room.hotel, currentReservation.room.number];
+    cell.textLabel.text = @"%@", currentReservation.guest.fullName;
+    
+    return cell;
+
 }
+
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+//    Reservation *reservation = self.allReservations[indexPath.row];
+//    
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+//    NSString *formattedStartDateString = [dateFormatter stringFromDate:reservation.startDate];
+//    NSString *formattedEndDateString = [dateFormatter stringFromDate:reservation.endDate];
+//    
+//    cell.textLabel.text = [NSString stringWithFormat:@"%@: %@ in Room: %i, From: %@ to %@", reservation.guest.fullName, reservation.room.hotel.name, reservation.room.number, formattedStartDateString, formattedEndDateString];
+//    cell.textLabel.numberOfLines = 0;
+//    
+//    return cell;
+//}
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
