@@ -69,20 +69,59 @@
 
 - (void)loadView {
     [super loadView];
-    [self setupTableView];
+    [self setupViewLayout];
     [self.view setBackgroundColor:[UIColor whiteColor]];
 }
 
-- (void)setupTableView {
-    [self allReservations];
+-(void)setupViewLayout {
+    self.searchBar = [[UISearchBar alloc]init];
     self.reservationsTableView = [[UITableView alloc]init];
+    
+    self.searchBar.delegate = self;
     self.reservationsTableView.dataSource = self;
-    self.reservationsTableView.delegate = self;
-    [self.view addSubview:self.reservationsTableView];
+    
     [self.reservationsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-    self.reservationsTableView.translatesAutoresizingMaskIntoConstraints - NO;
-    [AutoLayout fullScreenContraintsWithVFLForView:self.reservationsTableView];
-}
+    
+    self.searchBar.translatesAutoresizingMaskIntoConstraints = NO;
+    self.reservationsTableView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [self.view addSubview:self.searchBar];
+    [self.view addSubview:self.reservationsTableView];
+    
+    float navBarHeight = CGRectGetHeight(self.navigationController.navigationBar.frame);
+    
+    CGFloat statusBarHeight = 20.0;
+    CGFloat topMargin = navBarHeight + statusBarHeight;
+    CGFloat windowHeight = self.view.frame.size.height;
+    CGFloat frameHeight = (windowHeight - topMargin - statusBarHeight);
+    
+    NSDictionary *viewDictionary = @{@"searchBar": self.searchBar,
+                                     @"tableView": self.reservationsTableView};
+    
+    NSDictionary *metricsDictionary = @{@"topMargin": [NSNumber numberWithFloat:topMargin], @"frameHeight": [NSNumber numberWithFloat:frameHeight]};
+    
+    NSString *visualFormatString = @"V:|-topMargin-[searchBar(==topMargin)][tableView(==frameHeight)]|";
+    
+    [AutoLayout leadingConstraintFrom:self.searchBar toView:self.view];
+    [AutoLayout trailingConstraintFrom:self.searchBar toView:self.view];
+    [AutoLayout leadingConstraintFrom:self.reservationsTableView toView:self.view];
+    [AutoLayout trailingConstraintFrom:self.reservationsTableView toView:self.view];
+    
+    [NSLayoutConstraint constraintsWithVisualFormat:visualFormatString options:0 metrics:metricsDictionary views:viewDictionary];
+    
+    [self.searchBar setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.reservationsTableView setTranslatesAutoresizingMaskIntoConstraints:NO];}
+
+//- (void)setupTableView {
+//
+//    self.reservationsTableView = [[UITableView alloc]init];
+//    self.reservationsTableView.dataSource = self;
+//    self.reservationsTableView.delegate = self;
+//    [self.view addSubview:self.reservationsTableView];
+//    [self.reservationsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+////    self.reservationsTableView.translatesAutoresizingMaskIntoConstraints - NO;
+////    [AutoLayout fullScreenContraintsWithVFLForView:self.reservationsTableView];
+//}
 
 
 - (void)viewDidLoad {
@@ -103,7 +142,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     Reservation *currentReservation = [self.allReservations objectAtIndexPath:indexPath];
 //    cell.textLabel.text = [NSString stringWithFormat:@"%@ Room: %i", currentReservation.room.hotel, currentReservation.room.number];
-    cell.textLabel.text = @"%@", currentReservation.guest.fullName;
+    cell.textLabel.text = @"%@", [currentReservation.guest fullName];
     
     return cell;
 
