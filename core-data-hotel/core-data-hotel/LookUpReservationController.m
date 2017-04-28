@@ -20,10 +20,11 @@
 
 @interface LookUpReservationController () <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 
-//@property(strong, nonatomic) NSArray *allReservations;
 @property(strong, nonatomic) NSFetchedResultsController *allReservations;
 @property(strong, nonatomic) UITableView *reservationsTableView;
 @property(strong, nonatomic) UISearchBar *searchBar;
+@property(strong, nonatomic) NSArray *filteredResults;
+@property(strong, nonatomic) NSArray *allResults;
 
 @end
 
@@ -37,7 +38,7 @@
         
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Reservation"];
         NSError *reservationFetchError;
-        NSArray *results = [appDelegate.persistentContainer.viewContext executeRequest:request error:&reservationFetchError];
+        NSArray *results = [appDelegate.persistentContainer.viewContext executeFetchRequest:request error:&reservationFetchError];
         NSSortDescriptor *guestSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"guest.firstName" ascending:YES];
         request.sortDescriptors = @[guestSortDescriptor];
         NSError *reservationListError;
@@ -108,22 +109,39 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.allResults = self.allReservations.fetchedObjects;
+    self.filteredResults = self.allResults;
     // Do any additional setup after loading the view.
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[self.allReservations fetchedObjects]count];
+    return [self.filteredResults count];
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    Reservation *currentReservation = [self.allReservations objectAtIndexPath:indexPath];
+    Reservation *currentReservation = self.filteredResults[indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [currentReservation.guest firstName], [currentReservation.guest lastName]];
     
     return cell;
     
 }
 
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [self.searchBar isFirstResponder];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if ([self.searchBar.text isEqual:@""]) {
+        self.filteredResults = self.allResults;
+    } else {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self.guest.firstName CONTAINS %@ OR self.guest.lastName CONTAINS %@", self.searchBar.text, self.searchBar.text];
+        self.filteredResults = [self.allResults filteredArrayUsingPredicate:predicate];
+    }
+    
+    [self.reservationsTableView reloadData];
+}
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
