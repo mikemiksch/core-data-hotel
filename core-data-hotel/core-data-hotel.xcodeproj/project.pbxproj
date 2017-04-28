@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8317832B1EB2CB25008C94D3 /* HotelServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 8317832A1EB2CB25008C94D3 /* HotelServiceTest.m */; };
 		833AF25C1EB2607400A996D3 /* mappingModel1.0-1.1.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 833AF25B1EB2607400A996D3 /* mappingModel1.0-1.1.xcmappingmodel */; };
 		833AF25F1EB2637D00A996D3 /* mappingModel1.1-1.2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 833AF25E1EB2637D00A996D3 /* mappingModel1.1-1.2.xcmappingmodel */; };
 		833AF2631EB26DB000A996D3 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 833AF2611EB26DB000A996D3 /* Fabric.framework */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8317832A1EB2CB25008C94D3 /* HotelServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotelServiceTest.m; sourceTree = "<group>"; };
 		833AF25A1EB25DAC00A996D3 /* core_data_hotel 1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "core_data_hotel 1.1.xcdatamodel"; sourceTree = "<group>"; };
 		833AF25B1EB2607400A996D3 /* mappingModel1.0-1.1.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = "mappingModel1.0-1.1.xcmappingmodel"; sourceTree = "<group>"; };
 		833AF25D1EB2635D00A996D3 /* core_data_hotel 1.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "core_data_hotel 1.2.xcdatamodel"; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			children = (
 				83918AB11EB111D100593150 /* Info.plist */,
 				83918AB71EB1146000593150 /* AutoLayoutTest.m */,
+				8317832A1EB2CB25008C94D3 /* HotelServiceTest.m */,
 			);
 			path = "core-data-hotelTests";
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8317832B1EB2CB25008C94D3 /* HotelServiceTest.m in Sources */,
 				83918AB81EB1146000593150 /* AutoLayoutTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
