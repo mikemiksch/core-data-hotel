@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RoomsViewController.h"
 
 @interface HotelsViewController : UIViewController
+
+@property(strong, nonatomic) Hotel *selectedHotel;
 
 @end
